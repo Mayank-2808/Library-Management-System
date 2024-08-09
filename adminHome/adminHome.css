@@ -1,0 +1,141 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f2f2f2;
+}
+
+header {
+    background-color: #333333;
+    color: #fff;
+    /* text-align: center; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 10px;
+}
+h1 {
+    font-size: 28px;
+    font-family: 'Poppins', sans-serif;
+}
+
+#t {
+    display: grid;
+    place-items: center;
+    align-content: center;
+    font-family: 'Poppins', sans-serif;
+    margin: 15px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Apply animation to the h4 element */
+#t h4 {
+
+    animation: fadeIn 1s ease-in-out;
+}
+footer
+{
+    font-size: large;
+    margin: 20px;
+    margin-top: 13vw;
+}
+
+
+#logOut
+{
+    background-color: white;
+    border: none;
+    margin: 0;
+    width: 100%;
+}
+
+#list {
+    margin: 0;
+    padding: 0;
+    width: 3vw;
+    height: 3vw;
+    border: none;
+    background-color:#333333;
+}
+
+h1 {
+    /* border: solid; */
+    margin: 0;
+    text-align: center; /* Center the text */
+    flex-grow: 1;
+}
+
+.offcanvas-header{
+    background-color:#333333;
+}
+
+.offcanvas-body {
+    background-color: #f2f2f2;
+    color: black;
+}
+#studentIdDisplay {
+    display: inline-block;
+}
+
+.offcanvas-body {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.dropdown {
+    margin-top: auto; 
+}
+
+.cardBody {
+    float: left;
+    width: 50%;
+}
+
+.card {
+    width: 23%;
+    height: 170px;
+    transition: transform 0.3s ease;
+    overflow: hidden;
+    border: 1px solid #ccc;
+}
+.card:hover {
+    transform: scale(1.07); 
+     cursor: pointer;
+}
+h2 {
+    transition: opacity 0.3s ease;
+    opacity: 0;
+}
+.card:hover h2{
+    display: block;
+    opacity: 1; 
+
+}
+
+.cardBody h4 {
+    transition: opacity 0.3s ease; /* Transition for h4 opacity */
+}
+.card:hover .cardBody h4 {
+    opacity: 1; 
+
+}
+.chart {
+    margin: 20px auto;
+    width: 50%;
+    /* border: solid; */
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+.chart:hover {
+    transform: scale(1.07); 
+}

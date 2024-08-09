@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management System</title>
+    <link rel="stylesheet" href="adminLogin.css">
+</head>
+
+<body>
+    <header>
+        <h1>Library Management System</h1>
+    </header>
+    <main>
+        <section id="admin_login">
+            <form action="#" class="login" id="adminLogin">
+                <h2>Admin Login</h2>
+                <img src="../photos/email.png" alt="email"><input type="text" name="admin_username" id="admin_username"
+                    placeholder="Enter username" required> <br>
+                <img src="../photos/password.png" alt="password"><input type="password" name="admin_password"
+                    id="admin_password" placeholder="Enter password" required> <br>
+                <button id="LoginButton"> Login </button>
+            </form>
+            Not an admin? <a href="../studentLogin/studentLogin.html">Click Here</a>&nbsp &nbsp &nbsp
+            Create an account? <a href="../admin_sign_up/admin_sign_up.html">Click Here</a>
+        </section>
+    </main>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
+        import { getFirestore, collection, doc, setDoc, getDocs, addDoc, query, where } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCkguRAkkhEfu4JIjFgh7lrDbcv5jQ21ps",
+            authDomain: "lms1-2fdcb.firebaseapp.com",
+            projectId: "lms1-2fdcb",
+            storageBucket: "lms1-2fdcb.appspot.com",
+            messagingSenderId: "952940918932",
+            appId: "1:952940918932:web:9f757d9f2d77e445049c81"
+        };
+
+        const app = initializeApp(firebaseConfig);
+
+        const auth = getAuth(app);
+
+        const db = getFirestore(app);
+        const colRef = collection(db, 'admin');
+
+        const loginform = document.getElementById('adminLogin');
+
+        loginform.addEventListener('submit', async (e) => {
+            e.preventDefault()
+
+            const userQuery = query(colRef, where('email', '==', loginform.admin_username.value))
+            const querySnapshot = await getDocs(userQuery)
+
+            if (!querySnapshot.empty) {
+                signInWithEmailAndPassword(auth, loginform.admin_username.value, loginform.admin_password.value)
+                    .then((userCredential) => {
+                        const user = userCredential.user;
+                        loginform.reset();
+                        alert("login successful");
+                        window.open('../adminHome/adminHome.html', '_self');
+                    })
+                    .catch((error) => {
+                        const errorCode = error.code;
+                        const errorMessage = error.message;
+                        console.log(errorCode + " " + errorMessage);
+                        alert("Invalid Email or Password");
+                    })
+            }
+        })
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // User is signed in, see docs for a list of available properties
+                // https://firebase.google.com/docs/reference/js/auth.user
+                const uid = user.email;
+                console.log(uid);
+                // ...
+            } else {
+                // User is signed out
+                console.log('no log in')
+                // ...
+            }
+        });
+    </script>
+</body>
+
+</html>
